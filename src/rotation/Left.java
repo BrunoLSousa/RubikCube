@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package moviment;
+package rotation;
 
 import structure.cube.Cube;
 import structure.cube.Face;

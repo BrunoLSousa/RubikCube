@@ -5,13 +5,13 @@
  */
 package rubikcube;
 
-import moviment.Back;
-import moviment.Down;
-import moviment.Front;
-import moviment.Left;
-import moviment.Rotation;
-import moviment.Right;
-import moviment.Up;
+import rotation.Back;
+import rotation.Down;
+import rotation.Front;
+import rotation.Left;
+import rotation.Rotation;
+import rotation.Right;
+import rotation.Up;
 import structure.cube.Cube;
 
 /**

@@ -5,7 +5,7 @@
  */
 package structure;
 
-import moviment.Rotation;
+import rotation.Rotation;
 import structure.cube.Cube;
 
 /**
