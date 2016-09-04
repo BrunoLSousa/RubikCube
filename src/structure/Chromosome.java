@@ -5,10 +5,8 @@
  */
 package structure;
 
-import java.util.HashMap;
-import moviment.Movement;
+import moviment.Rotation;
 import structure.cube.Cube;
-import structure.cube.Face;
 
 /**
  *
@@ -16,15 +14,15 @@ import structure.cube.Face;
  */
 public class Chromosome {
     
-    private Movement[] genotype;
+    private Rotation[] genotype;
     private Cube phenotype;
 
     public Chromosome(Cube cubeInitialFormat) {
-        this.genotype = new Movement[50];
+        this.genotype = new Rotation[50];
         this.phenotype = cubeInitialFormat;
     }
     
-    public int addMoviment(Movement moviment){
+    public int addMoviment(Rotation moviment){
         if(isNotFull()){
             int indexNewMoviment = this.genotype.length;
             this.genotype[indexNewMoviment] = moviment;

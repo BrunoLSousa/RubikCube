@@ -12,18 +12,21 @@ import structure.cube.Face;
  *
  * @author bruno
  */
-public abstract class Movement {
+public abstract class Rotation {
     
     private Cube cube;
     protected String[] cachePosition;
     
-    public Movement(Cube cube){
+    public Rotation(Cube cube){
         this.cube = cube;
     }
     
     public abstract void rotateQuarterClockwise();
     
-    public abstract void rotateQuarterCounterclockwise();
+    public void rotateQuarterCounterclockwise(){
+        rotateHalfClockwise();
+        rotateQuarterClockwise();
+    }
     
     public void rotateHalfClockwise(){
         rotateQuarterClockwise();

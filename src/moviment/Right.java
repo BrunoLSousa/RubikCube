@@ -12,7 +12,7 @@ import structure.cube.Face;
  *
  * @author bruno
  */
-public class Right extends Movement {
+public class Right extends Rotation {
 
     public Right(Cube cube) {
         super(cube);
@@ -25,11 +25,6 @@ public class Right extends Movement {
         rotateBackToDown();
         rotateDownToFront();
         rotateRight();
-    }
-
-    @Override
-    public void rotateQuarterCounterclockwise() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     private void rotateFrontToUp() {

@@ -9,7 +9,7 @@ import moviment.Back;
 import moviment.Down;
 import moviment.Front;
 import moviment.Left;
-import moviment.Movement;
+import moviment.Rotation;
 import moviment.Right;
 import moviment.Up;
 import structure.cube.Cube;
@@ -26,14 +26,14 @@ public class RubikCube {
     public static void main(String[] args) {
         // TODO code application logic here
         Cube cube = new Cube();
-//        Movement movement = new Front(cube);
-//        Movement movement = new Up(cube);
-//        Movement movement = new Down(cube);
-//        Movement movement = new Left(cube);
-//        Movement movement = new Right(cube);
-        Movement movement = new Back(cube);
+        Rotation movement = new Front(cube);
+//        Rotation movement = new Up(cube);
+//        Rotation movement = new Down(cube);
+//        Rotation movement = new Left(cube);
+//        Rotation movement = new Right(cube);
+//        Rotation movement = new Back(cube);
         movement.printCube();
-        movement.rotateQuarterClockwise();
+        movement.rotateQuarterCounterclockwise();
         movement.printCube();
     }
 
