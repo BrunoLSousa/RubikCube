@@ -15,7 +15,7 @@ public class Fitness {
 
     private static final int PENALITY_Q1 = 1;
     private static final int PENALITY_Q2 = 4;
-    private static final int PENALITY_Q3 = 5;
+    private static final int PENALITY_Q3 = 6;
     private Chromosome chromosome;
 
     public Fitness(Chromosome chromosome) {
@@ -35,7 +35,7 @@ public class Fitness {
             String[][] face = this.chromosome.getPhenotype().getViewFace(f);
             for (int line = 0; line < this.chromosome.getPhenotype().getConfiguration(); line++) {
                 for (int column = 0; column < this.chromosome.getPhenotype().getConfiguration(); column++) {
-                    penalityQ1 = (!face[line][column].equals(face[1][1])) ? penalityQ1 + 1 : penalityQ1;
+                    penalityQ1 = (!face[line][column].equals(face[1][1])) ? penalityQ1 + PENALITY_Q1 : penalityQ1;
                 }
             }
         }
@@ -47,16 +47,16 @@ public class Fitness {
         for (Face f : Face.values()) {
             String[][] face = this.chromosome.getPhenotype().getViewFace(f);
             if(!face[0][1].equals(face[1][1])){
-                penalityQ2 += penalityQ2;
+                penalityQ2 += PENALITY_Q2;
             }
             if(!face[1][0].equals(face[1][1])){
-                penalityQ2 += penalityQ2;
+                penalityQ2 += PENALITY_Q2;
             }
             if(!face[2][1].equals(face[1][1])){
-                penalityQ2 += penalityQ2;
+                penalityQ2 += PENALITY_Q2;
             }
             if(!face[1][2].equals(face[1][1])){
-                penalityQ2 += penalityQ2;
+                penalityQ2 += PENALITY_Q2;
             }
         }
         return penalityQ2;
@@ -67,16 +67,16 @@ public class Fitness {
         for (Face f : Face.values()) {
             String[][] face = this.chromosome.getPhenotype().getViewFace(f);
             if((!face[0][0].equals(face[0][1]) || (!face[0][1].equals(face[1][1]))) && (!face[0][0].equals(face[1][0]) || (!face[1][0].equals(face[1][1])))){
-                penalityQ3 += penalityQ3;
+                penalityQ3 += PENALITY_Q3;
             }
             if((!face[2][0].equals(face[1][0]) || (!face[1][0].equals(face[1][1]))) && (!face[2][0].equals(face[2][1]) || (!face[2][1].equals(face[1][1])))){
-                penalityQ3 += penalityQ3;
+                penalityQ3 += PENALITY_Q3;
             }
             if((!face[2][2].equals(face[2][1]) || (!face[2][1].equals(face[1][1]))) && (!face[2][2].equals(face[1][2]) || (!face[1][2].equals(face[1][1])))){
-                penalityQ3 += penalityQ3;
+                penalityQ3 += PENALITY_Q3;
             }
             if((!face[0][2].equals(face[0][1]) || (!face[0][1].equals(face[1][1]))) && (!face[0][2].equals(face[1][2]) || (!face[1][2].equals(face[1][1])))){
-                penalityQ3 += penalityQ3;
+                penalityQ3 += PENALITY_Q3;
             }
         }
         return penalityQ3;

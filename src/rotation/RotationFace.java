@@ -17,8 +17,8 @@ public abstract class RotationFace {
     private Cube cube;
     protected String[] cachePosition;
     
-    public RotationFace(Cube cube){
-        this.cube = cube;
+    public RotationFace(){
+        
     }
     
     public abstract Cube rotateQuarterClockwise();
@@ -33,6 +33,10 @@ public abstract class RotationFace {
         rotateQuarterClockwise();
         rotateQuarterClockwise();
         return getCube();
+    }
+    
+    public void setCube(Cube cube){
+        this.cube = cube;
     }
     
     protected Cube getCube(){

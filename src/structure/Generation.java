@@ -5,6 +5,8 @@
  */
 package structure;
 
+import structure.cube.movements.MediatorBuilder;
+
 /**
  *
  * @author bruno
@@ -33,5 +35,29 @@ public class Generation {
             System.out.println();
         }
     }
+    
+    public void calculateFitness(){
+        for(int indexChromosome = 0; indexChromosome < this.population.length; indexChromosome++){
+            this.population[indexChromosome].applyMovement();
+        }
+    }
+    
+//    public void avaiableChromossome(){
+//        int sum = -1;
+//        int indexBest = -1;
+//        for(int indexChromosome = 0; indexChromosome < this.population.length; indexChromosome++){
+//            this.population[indexChromosome].applyMovement();
+//            if(sum == -1 || sum < this.population[indexChromosome].bestFitness){
+//                sum = this.population[indexChromosome].bestFitness;
+//                indexBest = indexChromosome;
+//            }
+//            this.population[indexChromosome].showChromosome();
+//        }
+//        System.out.println("\n\n\nMelhor Fitness: " + this.population[indexBest].bestFitness);
+//        System.out.println("\n\n\nÍndice do Cromossomo: " + indexBest);
+//        System.out.println("\n\n\nÍndice Final do Gene: " + this.population[indexBest].indexBestFitness);
+//        this.population[indexBest].showChromosome();
+//        this.population[indexBest].getPhenotype().printCube();
+//    }
     
 }

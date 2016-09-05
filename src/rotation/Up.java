@@ -14,8 +14,8 @@ import structure.cube.Face;
  */
 public class Up extends RotationFace{
 
-    public Up(Cube cube) {
-        super(cube);
+    public Up() {
+        
     }
 
     @Override

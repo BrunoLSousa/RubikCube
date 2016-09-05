@@ -21,10 +21,13 @@ public class Movement extends MovementColleague{
     @Override
     protected Cube doMoviment(Cube cube, EnumMovement id) {
         if(id.toString().contains("1")){
+            this.rotationFace.setCube(cube);
             return this.rotationFace.rotateQuarterCounterClockWise();
         }else if(id.toString().contains("2")){
+            this.rotationFace.setCube(cube);
             return this.rotationFace.rotateHalfClockwise();
         }else{
+            this.rotationFace.setCube(cube);
             return this.rotationFace.rotateQuarterClockwise();
         }
     }
