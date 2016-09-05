@@ -5,7 +5,9 @@
  */
 package rubikcube;
 
+import java.util.Arrays;
 import structure.Generation;
+import structure.GeneticAlgorithm;
 
 /**
  *
@@ -18,11 +20,28 @@ public class RubikCube {
      */
     public static void main(String[] args) {
         // TODO code application logic here        
-        Generation generation = new Generation(10, 50);
-        generation.creatingInitialPopulation();
-        generation.showGeneration();
-        System.out.println("\n");
-        generation.calculateFitness();
+//        Generation generation = new Generation(10, 50);
+//        generation.creatingInitialPopulation();
+//        generation.showGeneration();
+//        System.out.println("\n");
+//        generation.calculateFitness();
+//        double rate = 0.05;
+//        for (int i = 0; i < 20; i++) {
+//            System.out.print("0 ");
+//        }
+//        System.out.println();
+//        int chance = 0;
+//        for (int i = 0; i < 20; i++) {
+//            chance = 1 + (int) (Math.random() * 100);
+//            if (chance <= (rate*100)) {
+//                System.out.print("1 ");
+//            } else {
+//                System.out.print("0 ");
+//            }
+//        }
+//        System.out.println(num);
+        GeneticAlgorithm genetic = new GeneticAlgorithm();
+        genetic.createNewGeneration();
     }
 
 }

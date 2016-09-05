@@ -5,7 +5,9 @@
  */
 package structure;
 
-import structure.cube.movements.MediatorBuilder;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  *
@@ -29,17 +31,32 @@ public class Generation {
         }
     }
     
+    public void addChromosome(int index, Chromosome chromosome){
+        this.population[index] = chromosome;
+    }
+    
     public void showGeneration(){
-        for(int index=0; index < this.population.length; index++){
-            this.population[index].showChromosome();
+        for (Chromosome chromosome : this.population) {
+            chromosome.showChromosome();
             System.out.println();
         }
     }
     
     public void calculateFitness(){
-        for(int indexChromosome = 0; indexChromosome < this.population.length; indexChromosome++){
-            this.population[indexChromosome].applyMovement();
+        for (Chromosome chromosome : this.population) {
+            chromosome.applyMovement();
         }
+        List<Chromosome> c = Arrays.asList(this.population);
+        Collections.sort(c, Collections.reverseOrder());
+        this.population = (Chromosome[]) c.toArray();
+    }
+    
+    public Chromosome getChromosomeByIndex(int index){
+        return this.population[index];
+    }
+    
+    public Chromosome[] getChromosomes(){
+        return this.population;
     }
     
 //    public void avaiableChromossome(){
