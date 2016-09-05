@@ -42,6 +42,10 @@ public class Cube {
         return this.cube.get(face);
     }
     
+    public int getAmountFace(){
+        return this.cube.size();
+    }
+    
     public int getConfiguration(){
         if(this.cube != null){
             return this.cube.get(Face.Front).length;

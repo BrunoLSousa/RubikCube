@@ -5,8 +5,9 @@
  */
 package structure;
 
-import rotation.RotationFace;
+import java.util.Random;
 import structure.cube.Cube;
+import structure.cube.movements.EnumMovement;
 
 /**
  *
@@ -14,29 +15,33 @@ import structure.cube.Cube;
  */
 public class Chromosome {
     
-    private RotationFace[] genotype;
+    private EnumMovement[] genotype;
     private Cube phenotype;
 
-    public Chromosome(Cube cubeInitialFormat) {
-        this.genotype = new RotationFace[50];
-        this.phenotype = cubeInitialFormat;
+    public Chromosome(int lengthGenotype) {
+        this.phenotype = new Cube();
+        this.genotype = new EnumMovement[lengthGenotype];
     }
     
-    public int addMoviment(RotationFace moviment){
-        if(isNotFull()){
-            int indexNewMoviment = this.genotype.length;
-            this.genotype[indexNewMoviment] = moviment;
-            return 1;
+    public void initializeGenotype(){
+        for(int index = 0; index < this.genotype.length; index++){
+            int indexMovement = new Random().nextInt(EnumMovement.values().length);
+            this.genotype[index] = EnumMovement.values()[indexMovement];
         }
-        return 0;
-    }
-    
-    private boolean isNotFull(){
-        return this.genotype.length < 50;
     }
     
     public Cube getPhenotype(){
         return this.phenotype;
+    }
+    
+    public void resetPhenotype(){
+        this.phenotype = new Cube();
+    }
+    
+    protected void showChromosome(){
+        for(int index = 0; index < this.genotype.length; index++){
+            System.out.print(this.genotype[index] + " ");
+        }
     }
     
 }
