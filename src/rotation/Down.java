@@ -12,19 +12,20 @@ import structure.cube.Face;
  *
  * @author bruno
  */
-public class Down extends Rotation{
+public class Down extends RotationFace{
 
     public Down(Cube cube) {
         super(cube);
     }
 
     @Override
-    public void rotateQuarterClockwise() {
+    public Cube rotateQuarterClockwise() {
         rotateFrontToRight();
         rotateRightToBack();
         rotateBackToLeft();
         rotateLeftToFront();
         rotateDown();
+        return this.getCube();
     }
     
     private void rotateFrontToRight(){

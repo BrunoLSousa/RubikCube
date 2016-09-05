@@ -12,19 +12,20 @@ import structure.cube.Face;
  *
  * @author bruno
  */
-public class Back extends Rotation {
+public class Back extends RotationFace {
 
     public Back(Cube cube) {
         super(cube);
     }
 
     @Override
-    public void rotateQuarterClockwise() {
+    public Cube rotateQuarterClockwise() {
         rotateUpToLeft();
         rotateLeftToDown();
         rotateDownToRight();
         rotateRightToUp();
         rotateBack();
+        return this.getCube();
     }
 
     private void rotateUpToLeft() {
@@ -45,11 +46,9 @@ public class Back extends Rotation {
         String[][] down = this.getCube().getViewFace(Face.Down);
         int line = down.length;
         String[] newCachePosition = new String[line];
-        int column = line - 1;
         for (int index = 0; index < line; index++) {
             newCachePosition[index] = down[line - 1][index];
-            down[line - 1][index] = this.cachePosition[column];
-            column--;
+            down[line - 1][index] = this.cachePosition[index];
         }
         this.cachePosition = newCachePosition;
         this.getCube().updateFace(Face.Down, down);

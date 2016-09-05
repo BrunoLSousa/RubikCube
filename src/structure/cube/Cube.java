@@ -54,4 +54,18 @@ public class Cube {
         this.cube.put(key, face);
     }
     
+    public void printCube(){
+        for(Face face : Face.values()){
+            String[][] f = cube.get(face);
+            System.out.println(face.toString());
+            for(int line = 0; line < 3; line++){
+                for(int column = 0; column < 3; column++){
+                    System.out.print(f[line][column] + " ");
+                }
+                System.out.println();
+            }
+            System.out.println();
+        }
+    }
+    
 }

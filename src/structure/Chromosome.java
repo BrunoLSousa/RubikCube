@@ -5,7 +5,7 @@
  */
 package structure;
 
-import rotation.Rotation;
+import rotation.RotationFace;
 import structure.cube.Cube;
 
 /**
@@ -14,15 +14,15 @@ import structure.cube.Cube;
  */
 public class Chromosome {
     
-    private Rotation[] genotype;
+    private RotationFace[] genotype;
     private Cube phenotype;
 
     public Chromosome(Cube cubeInitialFormat) {
-        this.genotype = new Rotation[50];
+        this.genotype = new RotationFace[50];
         this.phenotype = cubeInitialFormat;
     }
     
-    public int addMoviment(Rotation moviment){
+    public int addMoviment(RotationFace moviment){
         if(isNotFull()){
             int indexNewMoviment = this.genotype.length;
             this.genotype[indexNewMoviment] = moviment;
