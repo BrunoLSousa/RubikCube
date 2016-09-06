@@ -46,6 +46,8 @@ public class RubikCube {
         int generation = 0;
         while (generation < totalGeneration) {
             genetic.getGeneration().calculateFitness();
+            Chromosome chromosome = genetic.returnBestChromosome();
+            chromosome.printFitness(generation);
             genetic.createNewGeneration();
             generation++;
         }

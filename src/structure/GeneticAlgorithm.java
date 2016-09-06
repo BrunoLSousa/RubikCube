@@ -18,10 +18,10 @@ import structure.cube.movements.EnumMovement;
 public class GeneticAlgorithm {
 
     public static final int LENGTH_POPULATION = 500;
-    public static final int LENGTH_CHROMOSOME = 100;
-    public static final double PERCENTAGE_CROSSOVER = 0.9;
-    public static final double PERCENTAGE_MUTATION = 0.3;
-    public static final double PERCENTAGE_ELITISM = 0.1;
+    public static final int LENGTH_CHROMOSOME = 20;
+    public static final double PERCENTAGE_CROSSOVER = 0.7;
+    public static final double PERCENTAGE_MUTATION = 0.1;
+    public static final double PERCENTAGE_UNIFORM_MUTATION = 0.3;
     public static final int LENGTH_TOURNAMENT = 2;
 
     protected Generation generation;
@@ -47,13 +47,9 @@ public class GeneticAlgorithm {
     }
 
     private Generation elitism() {
-        int index = 0;
         Generation newGeneration = new Generation(LENGTH_POPULATION, LENGTH_CHROMOSOME);
-        while (index < (LENGTH_POPULATION * PERCENTAGE_ELITISM)) {
-            newGeneration.addChromosome(index, this.generation.getChromosomeByIndex(index));
-            newGeneration.getChromosomeByIndex(index).resetPhenotype();
-            index++;
-        }
+        newGeneration.addChromosome(0, this.generation.getChromosomeByIndex(0));
+        newGeneration.getChromosomeByIndex(0).resetPhenotype();
         return newGeneration;
     }
 
@@ -64,42 +60,54 @@ public class GeneticAlgorithm {
     }
 
     private Generation crossover(Generation newGeneration) {
-        int index = (int) (LENGTH_POPULATION - (LENGTH_POPULATION * PERCENTAGE_CROSSOVER));
+        int index = 1;
         while (index < LENGTH_POPULATION) {
             Chromosome[] tournament = tournament();
             Chromosome father = tournament[0];
             tournament = tournament();
             Chromosome mother = tournament[0];
-            int limit = (int) (Math.random() * LENGTH_CHROMOSOME);
-            EnumMovement[] child1 = new EnumMovement[LENGTH_CHROMOSOME];
-            EnumMovement[] child2 = new EnumMovement[LENGTH_CHROMOSOME];
-            for (int i = 0; i < limit; i++) {
-                child1[i] = father.genotype[i];
-                child2[i] = mother.genotype[i];
-            }
-            for (int i = limit; i < LENGTH_CHROMOSOME; i++) {
-                child1[i] = mother.genotype[i];
-                child2[i] = father.genotype[i];
-            }
-            newGeneration.addChromosome(index, new Chromosome(child1));
+            EnumMovement[][] children = exchange(father, mother);
+            newGeneration.addChromosome(index, new Chromosome(children[0]));
             index++;
             if (index < LENGTH_POPULATION) {
-                newGeneration.addChromosome(index, new Chromosome(child2));
+                newGeneration.addChromosome(index, new Chromosome(children[1]));
                 index++;
             }
         }
         return newGeneration;
     }
 
+    private EnumMovement[][] exchange(Chromosome father, Chromosome mother) {
+        EnumMovement[][] genotypes = new EnumMovement[2][LENGTH_CHROMOSOME];
+        int chance = (int) (Math.random() * 100);
+        if (chance < (PERCENTAGE_CROSSOVER * 100)) {
+            int limit = (int) (Math.random() * LENGTH_CHROMOSOME);
+            for (int i = 0; i < limit; i++) {
+                genotypes[0][i] = father.genotype[i];
+                genotypes[1][i] = mother.genotype[i];
+            }
+            for (int i = limit; i < LENGTH_CHROMOSOME; i++) {
+                genotypes[0][i] = mother.genotype[i];
+                genotypes[1][i] = father.genotype[i];
+            }
+        } else {
+            genotypes[0] = father.genotype;
+            genotypes[1] = mother.genotype;
+        }
+        return genotypes;
+    }
+
     private Generation mutation(Generation newGeneration) {
-        int index = (int) (LENGTH_POPULATION - (LENGTH_POPULATION * PERCENTAGE_CROSSOVER));
+        int index = 1;
         while (index < LENGTH_POPULATION) {
-            int chance = 0;
-            for (int i = 0; i < LENGTH_CHROMOSOME; i++) {
-                chance = 1 + (int) (Math.random() * 100);
-                if (chance <= (PERCENTAGE_MUTATION * 100)) {
-                    int indexMovement = new Random().nextInt(EnumMovement.values().length);
-                    newGeneration.getChromosomeByIndex(index).genotype[i] = EnumMovement.values()[indexMovement];
+            int chance = 1 + (int) (Math.random() * 100);
+            if (chance < (PERCENTAGE_MUTATION * 100)) {
+                for (int i = 0; i < LENGTH_CHROMOSOME; i++) {
+                    chance = 1 + (int) (Math.random() * 100);
+                    if (chance <= (PERCENTAGE_UNIFORM_MUTATION * 100)) {
+                        int indexMovement = new Random().nextInt(EnumMovement.values().length);
+                        newGeneration.getChromosomeByIndex(index).genotype[i] = EnumMovement.values()[indexMovement];
+                    }
                 }
             }
             index++;

@@ -93,5 +93,9 @@ public class Chromosome implements Comparable<Chromosome> {
         System.out.println("Phenotype:");
         this.phenotype.printCube();
     }
+    
+    public void printFitness(int generation){
+        System.out.println("Geração " + (generation+1) + " - Fitness: " + this.valueFitness + "\n");
+    }
 
 }
