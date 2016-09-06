@@ -5,8 +5,7 @@
  */
 package rubikcube;
 
-import java.util.Arrays;
-import structure.Generation;
+import structure.Chromosome;
 import structure.GeneticAlgorithm;
 
 /**
@@ -40,8 +39,20 @@ public class RubikCube {
 //            }
 //        }
 //        System.out.println(num);
+//        GeneticAlgorithm genetic = new GeneticAlgorithm();
+//        genetic.createNewGeneration();
+        int totalGeneration = 1000;
         GeneticAlgorithm genetic = new GeneticAlgorithm();
-        genetic.createNewGeneration();
+        int generation = 0;
+        while (generation < totalGeneration) {
+            genetic.getGeneration().calculateFitness();
+            genetic.createNewGeneration();
+            generation++;
+        }
+        genetic.getGeneration().calculateFitness();
+        Chromosome chromosome = genetic.returnBestChromosome();
+        
+        chromosome.printInformation();
     }
 
 }

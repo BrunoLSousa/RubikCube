@@ -17,10 +17,10 @@ import structure.cube.movements.EnumMovement;
  */
 public class GeneticAlgorithm {
 
-    public static final int LENGTH_POPULATION = 10;
-    public static final int LENGTH_CHROMOSOME = 50;
+    public static final int LENGTH_POPULATION = 500;
+    public static final int LENGTH_CHROMOSOME = 100;
     public static final double PERCENTAGE_CROSSOVER = 0.9;
-    public static final double PERCENTAGE_MUTATION = 0.05;
+    public static final double PERCENTAGE_MUTATION = 0.3;
     public static final double PERCENTAGE_ELITISM = 0.1;
     public static final int LENGTH_TOURNAMENT = 2;
 
@@ -29,7 +29,7 @@ public class GeneticAlgorithm {
     public GeneticAlgorithm() {
         this.generation = new Generation(LENGTH_POPULATION, LENGTH_CHROMOSOME);
         this.generation.creatingInitialPopulation();
-        this.generation.calculateFitness();
+//        this.generation.calculateFitness();
     }
 
     public void createNewGeneration() {
@@ -38,17 +38,26 @@ public class GeneticAlgorithm {
         this.generation = newGeneration;
     }
 
+    public Generation getGeneration() {
+        return this.generation;
+    }
+
+    public Chromosome returnBestChromosome() {
+        return this.generation.getChromosomeByIndex(0);
+    }
+
     private Generation elitism() {
         int index = 0;
         Generation newGeneration = new Generation(LENGTH_POPULATION, LENGTH_CHROMOSOME);
         while (index < (LENGTH_POPULATION * PERCENTAGE_ELITISM)) {
             newGeneration.addChromosome(index, this.generation.getChromosomeByIndex(index));
+            newGeneration.getChromosomeByIndex(index).resetPhenotype();
             index++;
         }
         return newGeneration;
     }
 
-    public Generation applyOperators(Generation newGeneration) {
+    private Generation applyOperators(Generation newGeneration) {
         newGeneration = crossover(newGeneration);
         newGeneration = mutation(newGeneration);
         return newGeneration;
@@ -74,8 +83,10 @@ public class GeneticAlgorithm {
             }
             newGeneration.addChromosome(index, new Chromosome(child1));
             index++;
-            newGeneration.addChromosome(index, new Chromosome(child2));
-            index++;
+            if (index < LENGTH_POPULATION) {
+                newGeneration.addChromosome(index, new Chromosome(child2));
+                index++;
+            }
         }
         return newGeneration;
     }
@@ -88,9 +99,10 @@ public class GeneticAlgorithm {
                 chance = 1 + (int) (Math.random() * 100);
                 if (chance <= (PERCENTAGE_MUTATION * 100)) {
                     int indexMovement = new Random().nextInt(EnumMovement.values().length);
-                    newGeneration.getChromosomeByIndex(i).genotype[i] = EnumMovement.values()[indexMovement];
+                    newGeneration.getChromosomeByIndex(index).genotype[i] = EnumMovement.values()[indexMovement];
                 }
             }
+            index++;
         }
         return newGeneration;
     }

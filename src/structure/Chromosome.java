@@ -47,7 +47,7 @@ public class Chromosome implements Comparable<Chromosome> {
     public Cube getPhenotype() {
         return this.phenotype;
     }
-    
+
     public void resetPhenotype() {
         this.phenotype = new Cube();
     }
@@ -65,9 +65,9 @@ public class Chromosome implements Comparable<Chromosome> {
     protected void applyMovement() {
         for (EnumMovement gene : this.genotype) {
             this.phenotype = this.mediatorBuilder.getMediator().doMoviment(gene, this.phenotype);
-            Fitness fitness = new Fitness(this);
-            this.valueFitness = fitness.calculateFitness();
         }
+        Fitness fitness = new Fitness(this);
+        this.valueFitness = fitness.calculateFitness();
     }
 
     @Override
@@ -79,6 +79,19 @@ public class Chromosome implements Comparable<Chromosome> {
             return 1;
         }
         return 0;
+    }
+    
+    public void printInformation(){
+        System.out.println("Chromosome:");
+        for(int index = 0; index < this.genotype.length; index++){
+            System.out.print(this.genotype[index].toString() + " ");
+        }
+        System.out.println("\n");
+        
+        System.out.println("Fitness: " + this.valueFitness + "\n");
+        
+        System.out.println("Phenotype:");
+        this.phenotype.printCube();
     }
 
 }
