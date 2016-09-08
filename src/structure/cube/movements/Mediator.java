@@ -6,6 +6,7 @@
 package structure.cube.movements;
 
 import structure.cube.Cube;
+import structure.cube.movements.composite.EnumCompositeMovement;
 
 /**
  *
@@ -13,6 +14,6 @@ import structure.cube.Cube;
  */
 public interface Mediator {
 
-    public Cube doMoviment(EnumMovement movement, Cube cube);
+    public Cube doMoviment(EnumCompositeMovement movement, Cube cube);
 
 }

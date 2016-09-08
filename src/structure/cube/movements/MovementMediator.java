@@ -7,6 +7,8 @@ package structure.cube.movements;
 
 import java.util.ArrayList;
 import structure.cube.Cube;
+import structure.cube.movements.composite.CompositeMovement;
+import structure.cube.movements.composite.EnumCompositeMovement;
 
 /**
  *
@@ -14,21 +16,21 @@ import structure.cube.Cube;
  */
 public class MovementMediator implements Mediator{
     
-    protected ArrayList<MovementColleague> movements;
+    protected ArrayList<CompositeMovement> movements;
 
     public MovementMediator() {
         this.movements = new ArrayList<>();
     }
 
-    public void adicionarColleague(MovementColleague colleague) {
+    public void adicionarColleague(CompositeMovement colleague) {
         this.movements.add(colleague);
     }
 
     @Override
-    public Cube doMoviment(EnumMovement movement, Cube cube) {
-        for (MovementColleague m : this.movements) {
-            if (m.id == movement) {
-                cube = m.doMoviment(cube, movement);
+    public Cube doMoviment(EnumCompositeMovement movement, Cube cube) {
+        for (CompositeMovement m : this.movements) {
+            if (m.getId() == movement) {
+                cube = m.doMoviment(cube);
                 break;
             }
         }

@@ -7,8 +7,8 @@ package structure;
 
 import java.util.Random;
 import structure.cube.Cube;
-import structure.cube.movements.EnumMovement;
 import structure.cube.movements.MediatorBuilder;
+import structure.cube.movements.composite.EnumCompositeMovement;
 
 /**
  *
@@ -16,20 +16,20 @@ import structure.cube.movements.MediatorBuilder;
  */
 public class Chromosome implements Comparable<Chromosome> {
 
-    protected EnumMovement[] genotype;
+    protected EnumCompositeMovement[] genotype;
     private Cube phenotype;
     private MediatorBuilder mediatorBuilder;
     private int valueFitness;
 
     public Chromosome(int lengthGenotype) {
         this.phenotype = new Cube();
-        this.genotype = new EnumMovement[lengthGenotype];
+        this.genotype = new EnumCompositeMovement[lengthGenotype];
         this.mediatorBuilder = new MediatorBuilder();
         this.mediatorBuilder.createMediator();
         this.valueFitness = -1;
     }
 
-    public Chromosome(EnumMovement[] genotype) {
+    public Chromosome(EnumCompositeMovement[] genotype) {
         this.phenotype = new Cube();
         this.genotype = genotype;
         this.mediatorBuilder = new MediatorBuilder();
@@ -39,8 +39,8 @@ public class Chromosome implements Comparable<Chromosome> {
 
     public void initializeGenotype() {
         for (int index = 0; index < this.genotype.length; index++) {
-            int indexMovement = new Random().nextInt(EnumMovement.values().length);
-            this.genotype[index] = EnumMovement.values()[indexMovement];
+            int indexMovement = new Random().nextInt(EnumCompositeMovement.values().length);
+            this.genotype[index] = EnumCompositeMovement.values()[indexMovement];
         }
     }
 
@@ -63,10 +63,11 @@ public class Chromosome implements Comparable<Chromosome> {
     }
 
     protected void applyMovement() {
-        for (EnumMovement gene : this.genotype) {
+        for (EnumCompositeMovement gene : this.genotype) {
             this.phenotype = this.mediatorBuilder.getMediator().doMoviment(gene, this.phenotype);
         }
         Fitness fitness = new Fitness(this);
+//        Fitness fitness = new Fitness(this.phenotype);
         this.valueFitness = fitness.calculateFitness();
     }
 
@@ -80,22 +81,29 @@ public class Chromosome implements Comparable<Chromosome> {
         }
         return 0;
     }
-    
-    public void printInformation(){
+
+    public void printInformation() {
         System.out.println("Chromosome:");
-        for(int index = 0; index < this.genotype.length; index++){
+        for (int index = 0; index < this.genotype.length; index++) {
             System.out.print(this.genotype[index].toString() + " ");
         }
         System.out.println("\n");
-        
+
         System.out.println("Fitness: " + this.valueFitness + "\n");
-        
+
         System.out.println("Phenotype:");
         this.phenotype.printCube();
     }
-    
-    public void printFitness(int generation){
-        System.out.println("Geração " + (generation+1) + " - Fitness: " + this.valueFitness + "\n");
+
+    public void printGenotype() {
+        System.out.println("Chromosome:");
+        for (int index = 0; index < this.genotype.length; index++) {
+            System.out.print(this.genotype[index].toString() + " ");
+        }
+    }
+
+    public void printFitness(int generation) {
+        System.out.println("Geração " + (generation + 1) + " - Fitness: " + this.valueFitness + "\n");
     }
 
 }
