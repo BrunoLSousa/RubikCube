@@ -18,7 +18,7 @@ import structure.cube.movements.composite.EnumCompositeMovement;
 public class GeneticAlgorithm {
 
     public static final int LENGTH_POPULATION = 100;
-    public static final int LENGTH_CHROMOSOME = 50;
+    public static final int LENGTH_CHROMOSOME = 10;
     public static final double PERCENTAGE_CROSSOVER = 0.9;
     public static final double PERCENTAGE_MUTATION = 0.1;
     public static final double PERCENTAGE_UNIFORM_MUTATION = 0.3;
