@@ -86,19 +86,19 @@ public class LineChartDemo6 extends ApplicationFrame {
         final XYSeries better = new XYSeries("Melhor");
         final XYSeries lesser = new XYSeries("Pior");
         final XYSeries mean = new XYSeries("Média");
-        final XYSeries standardDeviation = new XYSeries("Desvio Padrão");
+        final XYSeries best = new XYSeries("Ótimo");
         for (int x = 0; x < generation; x++) {
             better.add(x, dataSet[x][0]);
             lesser.add(x, dataSet[x][1]);
             mean.add(x, dataSet[x][2]);
-            standardDeviation.add(x, dataSet[x][3]);
+            best.add(x, 0);
         }
 
         final XYSeriesCollection dataset = new XYSeriesCollection();
-        dataset.addSeries(lesser);
+        dataset.addSeries(best);
         dataset.addSeries(better);
         dataset.addSeries(mean);
-        dataset.addSeries(standardDeviation);
+        dataset.addSeries(lesser);
 
         return dataset;
 

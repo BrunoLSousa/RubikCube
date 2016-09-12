@@ -16,7 +16,7 @@ import structure.cube.movements.primary.PrimaryMovement;
  */
 public abstract class CompositeMovement {
     
-    private EnumCompositeMovement id;
+    protected EnumCompositeMovement id;
     private List<PrimaryMovement> primaryMovements;
     
     public CompositeMovement(EnumCompositeMovement id){

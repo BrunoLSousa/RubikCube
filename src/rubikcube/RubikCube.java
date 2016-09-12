@@ -33,7 +33,7 @@ public class RubikCube {
             dataSet[generation][0] = genetic.returnBestChromosome().getValueFitness();
             dataSet[generation][1] = genetic.returnInferiorChromosome().getValueFitness();
             dataSet[generation][2] = (dataSet[generation][0] + dataSet[generation][1]) / 2;
-            dataSet[generation][3] = Math.sqrt(((dataSet[generation][0] - dataSet[generation][2]) * (dataSet[generation][0] - dataSet[generation][2])) + ((dataSet[generation][1] - dataSet[generation][2]) * (dataSet[generation][1] - dataSet[generation][2])));
+//            dataSet[generation][3] = Math.sqrt(((dataSet[generation][0] - dataSet[generation][2]) * (dataSet[generation][0] - dataSet[generation][2])) + ((dataSet[generation][1] - dataSet[generation][2]) * (dataSet[generation][1] - dataSet[generation][2])));
             genetic.createNewGeneration();
             generation++;
         }
