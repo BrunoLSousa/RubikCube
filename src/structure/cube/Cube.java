@@ -18,13 +18,11 @@ public class Cube {
     public Cube(HashMap<Face, String[][]> cube) {
         this.cube = new HashMap<>();
         cloneCube(cube);
-//        initializeCube();
     }
 
     public Cube(Cube cube) {
         this.cube = new HashMap<>();
         cloneCube(cube);
-//        initializeCube();
     }
     
     private void cloneCube(HashMap<Face, String[][]> cube) {
@@ -55,25 +53,6 @@ public class Cube {
         }
     }
     
-    //método inicializado de um genótipo para teste.
-//    private void initializeCube(){
-//        //fazer aqui o upload do arquivo de teste.
-//        
-//        String[][] front = {{"G", "B", "B"}, {"G", "O", "O"}, {"G", "W", "W"}};
-//        String[][] left = {{"B", "O", "R"}, {"G", "G", "Y"}, {"B", "B", "R"}};
-//        String[][] right = {{"R", "O", "B"}, {"W", "B", "W"}, {"G", "R", "Y"}};
-//        String[][] back = {{"O", "B", "R"}, {"B", "R", "R"}, {"O", "W", "Y"}};
-//        String[][] up = {{"W", "Y", "W"}, {"Y", "Y", "G"}, {"Y", "R", "Y"}};
-//        String[][] down = {{"W", "G", "O"}, {"O", "W", "Y"}, {"O", "R", "G"}};
-//        
-//        this.cube.put(Face.Front, front);
-//        this.cube.put(Face.Left, left);
-//        this.cube.put(Face.Right, right);
-//        this.cube.put(Face.Back, back);
-//        this.cube.put(Face.Up, up);
-//        this.cube.put(Face.Down, down);
-//    }
-//    
     public String[][] getViewFace(Face face){
         return this.cube.get(face);
     }
@@ -89,7 +68,7 @@ public class Cube {
         return 0;
     }
     
-    //atualiza determinada face.
+    //atualiza determinada face do cubo.
     public void updateFace(Face key, String[][] face){
         this.cube.remove(key);
         this.cube.put(key, face);

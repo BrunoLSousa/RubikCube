@@ -5,10 +5,8 @@
  */
 package structure;
 
-import java.util.HashMap;
 import java.util.Random;
 import structure.cube.Cube;
-import structure.cube.Face;
 import structure.cube.movements.MediatorBuilder;
 import structure.cube.movements.EnumCompositeMovement;
 

@@ -5,32 +5,12 @@
  */
 package tests;
 
-import java.awt.Color;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartPanel;
-import org.jfree.chart.ChartUtilities;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.renderer.category.CategoryItemRenderer;
-import org.jfree.data.category.DefaultCategoryDataset;
 import report.ConvergenceGraphic;
 import report.ReportValues;
-import structure.Chromosome;
-import structure.Generation;
 import structure.GeneticAlgorithm;
-import structure.cube.movements.EnumCompositeMovement;
 
 /**
  *
@@ -71,52 +51,7 @@ public class PopulationGenerationTests {
         return dataSet;
     }
 
-    public static void main(String[] args) {
-        BufferedReader buffRead = null;
-        try {
-//            buffRead = new BufferedReader(new FileReader("semente.txt"));
-            String line = "";
-            int index = 0;
-            List<double[][]> historic = new ArrayList<>();
-            double[][] dataSet = new double[1000][4];
-            for (int i = 1; i <= 5; i++) {
-                buffRead = new BufferedReader(new FileReader("/home/bruno/NetBeansProjects/RubikCube/experiments/population_generation/report/Valores p2000 g1000 - " + i + ".txt"));
-                while (index < 1000) {
-                    if (line != null && !line.equals("")) {
-                        String[] split = line.split(";");
-                        dataSet[index][0] = Double.parseDouble(split[0]);
-                        dataSet[index][1] = Double.parseDouble(split[1]);
-                        dataSet[index][2] = Double.parseDouble(split[2]);
-                        dataSet[index][3] = Double.parseDouble(split[2]);
-                        index++;
-                    }
-                    line = buffRead.readLine();
-                }
-                historic.add(dataSet);
-            }
-            ConvergenceGraphic graphic = new ConvergenceGraphic();
-            ReportValues report = new ReportValues();
-//            String nameGraphic = "experiments/population_generation/grafic/Gráfico p" + 1500 + " g" + 1000 + " - " + (4 + 1);
-//            String nameGraphic = "experiments/population_generation/grafic/Gráfico p" + 2000 + " g" + 1000 + " - media final";
-//            graphic.generate(nameGraphic, 1000, dataSet);
-            String nameReport = "experiments/population_generation/report/Valores p" + 2000 + " g" + 1000 + " - media final";
-            report.generate(nameReport, 1000, dataSet);
-
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Generation.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Generation.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                buffRead.close();
-            } catch (IOException ex) {
-                Logger.getLogger(Generation.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
-    }
-
-    public void teste(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {
         ConvergenceGraphic graphic = new ConvergenceGraphic();
         ReportValues report = new ReportValues();
         int population = 2000;
@@ -144,7 +79,6 @@ public class PopulationGenerationTests {
                 report.generate(nameReport, generation, dataSet);
                 generation += 500;
             }
-            //gerar relatório final com a média dos melhores, a média do piores, a média total e a solução ótima.
             population += 500;
         }
     }

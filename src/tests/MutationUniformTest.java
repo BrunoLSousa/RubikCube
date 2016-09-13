@@ -19,13 +19,7 @@ import structure.GeneticAlgorithm;
 public class MutationUniformTest {
 
     private List<double[][]> historic;
-//    private double crossover;
-//    private double mutation;
-
-//    variação da população de 500 até 2500.
-//    variação da geração de 500 até 2500.
-//    10 repetições para os testes
-//    public CrossoverMutationTests(int lengthGeneration, double crossover, double mutation) {
+    
     public MutationUniformTest(int lengthGeneration) {
         this.historic = new ArrayList<>();
     }
@@ -58,29 +52,27 @@ public class MutationUniformTest {
         ConvergenceGraphic graphic = new ConvergenceGraphic();
         ReportValues report = new ReportValues();
         CrossoverMutationTests tests = new CrossoverMutationTests(GeneticAlgorithm.GENERATION);
-        double mutationUniform = 0.50;
-//            while (mutation <= 0.51) {
-        int repetition = 0;
-        while (repetition < 5) {
-            GeneticAlgorithm genetic = new GeneticAlgorithm(null);
+        double mutationUniform = 0.01;
+        while (mutationUniform <= 0.51) {
+            int repetition = 0;
+            while (repetition < 5) {
+                GeneticAlgorithm genetic = new GeneticAlgorithm(null);
 //            genetic.PERCENTAGE_UNIFORM_MUTATION = mutationUniform;
-            genetic.evolve();
-            tests.addHistoric(genetic.getDataSet());
-            String nameGraphic = "experiments/mutation_uniform/graphic/Gráfico mu" + mutationUniform + " - " + (repetition + 1);
-            graphic.generate(nameGraphic, GeneticAlgorithm.GENERATION, genetic.getDataSet());
-            String nameReport = "experiments/mutation_uniform/report/Valores mu" + mutationUniform + " - " + (repetition + 1);
-            report.generate(nameReport, GeneticAlgorithm.GENERATION, genetic.getDataSet());
-            repetition++;
+                genetic.evolve();
+                tests.addHistoric(genetic.getDataSet());
+                String nameGraphic = "experiments/mutation_uniform/graphic/Gráfico mu" + mutationUniform + " - " + (repetition + 1);
+                graphic.generate(nameGraphic, GeneticAlgorithm.GENERATION, genetic.getDataSet());
+                String nameReport = "experiments/mutation_uniform/report/Valores mu" + mutationUniform + " - " + (repetition + 1);
+                report.generate(nameReport, GeneticAlgorithm.GENERATION, genetic.getDataSet());
+                repetition++;
+            }
+            double[][] dataSet = tests.createMeanGeneral(GeneticAlgorithm.GENERATION);
+            String nameGraphic = "experiments/mutation_uniform/graphic/Gráfico mu" + mutationUniform + " - media final";
+            graphic.generate(nameGraphic, GeneticAlgorithm.GENERATION, dataSet);
+            String nameReport = "experiments/mutation_uniform/report/Valores mu" + mutationUniform + " - media final";
+            report.generate(nameReport, GeneticAlgorithm.GENERATION, dataSet);
+            mutationUniform += 0.10;
         }
-        double[][] dataSet = tests.createMeanGeneral(GeneticAlgorithm.GENERATION);
-        String nameGraphic = "experiments/mutation_uniform/graphic/Gráfico mu" + mutationUniform + " - media final";
-        graphic.generate(nameGraphic, GeneticAlgorithm.GENERATION, dataSet);
-        String nameReport = "experiments/mutation_uniform/report/Valores mu" + mutationUniform + " - media final";
-        report.generate(nameReport, GeneticAlgorithm.GENERATION, dataSet);
-//                mutation += 0.1;
-//            }
-        //gerar relatório final com a média dos melhores, a média do piores, a média total e a solução ótima.
-//            crossover -= 0.2;
 
     }
 }

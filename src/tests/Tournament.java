@@ -19,13 +19,7 @@ import structure.GeneticAlgorithm;
 public class Tournament {
 
     private List<double[][]> historic;
-//    private double crossover;
-//    private double mutation;
-
-//    variação da população de 500 até 2500.
-//    variação da geração de 500 até 2500.
-//    10 repetições para os testes
-//    public CrossoverMutationTests(int lengthGeneration, double crossover, double mutation) {
+    
     public Tournament(int lengthGeneration) {
         this.historic = new ArrayList<>();
     }
@@ -59,28 +53,26 @@ public class Tournament {
         ReportValues report = new ReportValues();
         CrossoverMutationTests tests = new CrossoverMutationTests(GeneticAlgorithm.GENERATION);
         int tournament = 10;
-//            while (mutation <= 0.51) {
-        int repetition = 0;
-        while (repetition < 5) {
-            GeneticAlgorithm genetic = new GeneticAlgorithm(null);
+        while (tournament >= 1) {
+            int repetition = 0;
+            while (repetition < 5) {
+                GeneticAlgorithm genetic = new GeneticAlgorithm(null);
 //            genetic.LENGTH_TOURNAMENT = tournament;
-            genetic.evolve();
-            tests.addHistoric(genetic.getDataSet());
-            String nameGraphic = "experiments/tournament/graphic/Gráfico t" + tournament + " - " + (repetition + 1);
-            graphic.generate(nameGraphic, GeneticAlgorithm.GENERATION, genetic.getDataSet());
-            String nameReport = "experiments/tournament/report/Valores t" + tournament + " - " + (repetition + 1);
-            report.generate(nameReport, GeneticAlgorithm.GENERATION, genetic.getDataSet());
-            repetition++;
+                genetic.evolve();
+                tests.addHistoric(genetic.getDataSet());
+                String nameGraphic = "experiments/tournament/graphic/Gráfico t" + tournament + " - " + (repetition + 1);
+                graphic.generate(nameGraphic, GeneticAlgorithm.GENERATION, genetic.getDataSet());
+                String nameReport = "experiments/tournament/report/Valores t" + tournament + " - " + (repetition + 1);
+                report.generate(nameReport, GeneticAlgorithm.GENERATION, genetic.getDataSet());
+                repetition++;
+            }
+            double[][] dataSet = tests.createMeanGeneral(GeneticAlgorithm.GENERATION);
+            String nameGraphic = "experiments/tournament/graphic/Gráfico t" + tournament + " - media final";
+            graphic.generate(nameGraphic, GeneticAlgorithm.GENERATION, dataSet);
+            String nameReport = "experiments/tournament/report/Valores t" + tournament + " - media final";
+            report.generate(nameReport, GeneticAlgorithm.GENERATION, dataSet);
+            tournament -= 2;
         }
-        double[][] dataSet = tests.createMeanGeneral(GeneticAlgorithm.GENERATION);
-        String nameGraphic = "experiments/tournament/graphic/Gráfico t" + tournament + " - media final";
-        graphic.generate(nameGraphic, GeneticAlgorithm.GENERATION, dataSet);
-        String nameReport = "experiments/tournament/report/Valores t" + tournament + " - media final";
-        report.generate(nameReport, GeneticAlgorithm.GENERATION, dataSet);
-//                mutation += 0.1;
-//            }
-        //gerar relatório final com a média dos melhores, a média do piores, a média total e a solução ótima.
-//            crossover -= 0.2;
 
     }
 }

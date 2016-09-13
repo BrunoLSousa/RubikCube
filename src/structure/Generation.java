@@ -5,19 +5,10 @@
  */
 package structure;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import structure.cube.Cube;
-import structure.cube.Face;
-import structure.cube.movements.EnumCompositeMovement;
 
 /**
  *
@@ -40,47 +31,6 @@ public class Generation {
             this.population[index] = chromosome;
         }
     }
-    
-//    public void creatingInitialPopulation(Cube cube) {
-//        BufferedReader buffRead = null;
-//        try {
-////            buffRead = new BufferedReader(new FileReader("semente.txt"));
-//            buffRead = new BufferedReader(new FileReader("semente3.txt"));
-//            String line = "";
-//            int index = 0;
-//            while (index < this.population.length) {
-//                if (line != null && !line.equals("")) {
-//                    String[] split = line.split("\\,");
-//                    Chromosome chromosome = new Chromosome(this.lengthChromosome, cube);
-//                    for (int i = 0; i < this.lengthChromosome; i++) {
-////                    int i = 0;
-////                    int j = 0;
-////                    while(i < this.lengthChromosome) {
-////                        if (split[j].equals("B") || split[j].equals("D") || split[j].equals("F") || split[j].equals("L") || split[j].equals("R") || split[j].equals("U")) {
-//                            chromosome.genotype[i] = EnumCompositeMovement.valueOf(split[i]);
-////                            chromosome.genotype[i] = EnumPrimaryMovement.valueOf(split[i]);
-////                            i++;
-////                        }
-////                        j++;
-//                    }
-//                    this.population[index] = chromosome;
-//                    index++;
-//                }
-//                line = buffRead.readLine();
-//            }
-//        } catch (FileNotFoundException ex) {
-//            Logger.getLogger(Generation.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (IOException ex) {
-//            Logger.getLogger(Generation.class.getName()).log(Level.SEVERE, null, ex);
-//        } finally {
-//            try {
-//                buffRead.close();
-//            } catch (IOException ex) {
-//                Logger.getLogger(Generation.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }
-//
-//    }
 
     public void addChromosome(int index, Chromosome chromosome) {
         this.population[index] = chromosome;

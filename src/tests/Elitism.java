@@ -53,7 +53,6 @@ public class Elitism {
         ReportValues report = new ReportValues();
         CrossoverMutationTests tests = new CrossoverMutationTests(GeneticAlgorithm.GENERATION);
         int elitism = 0;
-//            while (mutation <= 0.51) {
         int repetition = 0;
         while (repetition < 5) {
             GeneticAlgorithm genetic = new GeneticAlgorithm(null);
@@ -71,10 +70,5 @@ public class Elitism {
         graphic.generate(nameGraphic, GeneticAlgorithm.GENERATION, dataSet);
         String nameReport = "experiments/elitism/report/Valores t" + elitism + " - media final";
         report.generate(nameReport, GeneticAlgorithm.GENERATION, dataSet);
-//                mutation += 0.1;
-//            }
-        //gerar relatório final com a média dos melhores, a média do piores, a média total e a solução ótima.
-//            crossover -= 0.2;
-
     }
 }

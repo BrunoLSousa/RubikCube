@@ -20,7 +20,6 @@ import structure.cube.movements.EnumCompositeMovement;
  */
 public class GeneticAlgorithm {
 
-    // crossover: 0,90; mutation: 0,15; uniforme mutation: 0,15; length_tournament: 10;
     public static final int GENERATION = 1000;
     public static final int LENGTH_POPULATION = 1500;
     public static final int LENGTH_CHROMOSOME = 20;
@@ -41,8 +40,6 @@ public class GeneticAlgorithm {
     }
 
     public GeneticAlgorithm(int lengthPopulation, int lengthGeracao, HashMap<Face, String[][]> cube) {
-//        this.GENERATION = lengthGeracao;
-//        this.LENGTH_POPULATION = lengthPopulation;
         this.generation = new Generation(LENGTH_POPULATION, LENGTH_CHROMOSOME);
         this.cube = new Cube(cube);
         this.generation.creatingInitialPopulation(this.cube);
