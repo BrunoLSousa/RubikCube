@@ -6,7 +6,6 @@
 package structure.cube.movements;
 
 import structure.cube.Cube;
-import structure.cube.movements.composite.EnumCompositeMovement;
 
 /**
  *

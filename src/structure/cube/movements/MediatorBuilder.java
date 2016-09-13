@@ -11,7 +11,6 @@ import rotation.Front;
 import rotation.Left;
 import rotation.Right;
 import rotation.Up;
-import structure.cube.movements.composite.EnumCompositeMovement;
 import structure.cube.movements.composite.MovementSingle;
 import structure.cube.movements.composite.ThreeCornerSwapCCW;
 import structure.cube.movements.composite.ThreeCornerSwapCW;
@@ -38,6 +37,7 @@ public class MediatorBuilder {
         this.mediator = new MovementMediator();
     }
     
+    //método de criação do Builder.
     public void createMediator(){
         buildMovementsQuarterClockWise();
         buildMovementsQuarterCounterClockWise();

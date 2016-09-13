@@ -8,7 +8,6 @@ package structure.cube.movements;
 import java.util.ArrayList;
 import structure.cube.Cube;
 import structure.cube.movements.composite.CompositeMovement;
-import structure.cube.movements.composite.EnumCompositeMovement;
 
 /**
  *

@@ -25,25 +25,13 @@ public class Fitness {
         this.chromosome = chromosome;
     }
 
-//    public Fitness(Cube cube) {
-//        this.cube = cube;
-//        this.penality = 12;
-//    }
-
+    //método responsável por calcular a fitness de um cromossomo.
     public int calculateFitness() {
         int penality = calculateQ1();
         penality += calculateQ2();
         penality += calculateQ3();
         return penality;
     }
-    
-//    public int calculateFitness() {
-//        calculeBorder1();
-//        calculeBorder2();
-//        calculeBorder3();
-//        calculeBorder4();
-//        return 5 * (2*penality) + 7;
-//    }
 
     private int calculateQ1() {
         int penalityQ1 = 0;
@@ -59,49 +47,16 @@ public class Fitness {
     }
 
     private int calculateQ2() {
-//        int penalityQ2 = 0;
         int penalityQ2 = calculeBorder1();
         penalityQ2 += calculeBorder2();
         penalityQ2 += calculeBorder3();
         penalityQ2 += calculeBorder4();
-        
-//        for (Face f : Face.values()) {
-//            String[][] face = this.chromosome.getPhenotype().getViewFace(f);
-//            if (!face[0][1].equals(face[1][1])) {
-//                penalityQ2 += PENALITY_Q2;
-//            }
-//            if (!face[1][0].equals(face[1][1])) {
-//                penalityQ2 += PENALITY_Q2;
-//            }
-//            if (!face[2][1].equals(face[1][1])) {
-//                penalityQ2 += PENALITY_Q2;
-//            }
-//            if (!face[1][2].equals(face[1][1])) {
-//                penalityQ2 += PENALITY_Q2;
-//            }
-//        }
         return penalityQ2 * PENALITY_Q2;
     }
 
     private int calculateQ3() {
-//        int penalityQ3 = 0;
         int penalityQ3 = calculeCorner1();
         penalityQ3 += calculeCorner2();
-//        for (Face f : Face.values()) {
-//            String[][] face = this.chromosome.getPhenotype().getViewFace(f);
-//            if ((!face[0][0].equals(face[0][1]) || (!face[0][1].equals(face[1][1]))) && (!face[0][0].equals(face[1][0]) || (!face[1][0].equals(face[1][1])))) {
-//                penalityQ3 += PENALITY_Q3;
-//            }
-//            if ((!face[2][0].equals(face[1][0]) || (!face[1][0].equals(face[1][1]))) && (!face[2][0].equals(face[2][1]) || (!face[2][1].equals(face[1][1])))) {
-//                penalityQ3 += PENALITY_Q3;
-//            }
-//            if ((!face[2][2].equals(face[2][1]) || (!face[2][1].equals(face[1][1]))) && (!face[2][2].equals(face[1][2]) || (!face[1][2].equals(face[1][1])))) {
-//                penalityQ3 += PENALITY_Q3;
-//            }
-//            if ((!face[0][2].equals(face[0][1]) || (!face[0][1].equals(face[1][1]))) && (!face[0][2].equals(face[1][2]) || (!face[1][2].equals(face[1][1])))) {
-//                penalityQ3 += PENALITY_Q3;
-//            }
-//        }
         return penalityQ3 * PENALITY_Q3;
     }
     

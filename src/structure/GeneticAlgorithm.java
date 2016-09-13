@@ -7,10 +7,12 @@ package structure;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
-import structure.cube.movements.composite.EnumCompositeMovement;
-import structure.cube.movements.primary.EnumPrimaryMovement;
+import structure.cube.Cube;
+import structure.cube.Face;
+import structure.cube.movements.EnumCompositeMovement;
 
 /**
  *
@@ -18,22 +20,35 @@ import structure.cube.movements.primary.EnumPrimaryMovement;
  */
 public class GeneticAlgorithm {
 
-    public static final int LENGTH_POPULATION = 5000;
-    public static final int LENGTH_CHROMOSOME = 30;
-    public static final double PERCENTAGE_CROSSOVER = 0.90;
+    // crossover: 0,90; mutation: 0,15; uniforme mutation: 0,15; length_tournament: 10;
+    public static final int GENERATION = 1000;
+    public static final int LENGTH_POPULATION = 1500;
+    public static final int LENGTH_CHROMOSOME = 20;
+    public static final double PERCENTAGE_CROSSOVER = 0.30;
     public static final double PERCENTAGE_MUTATION = 0.15;
-    //melhor crossover 0,3, mutação 0,5 e uniforme mutação 0,3. -> valor fitness = 170.
     public static final double PERCENTAGE_UNIFORM_MUTATION = 0.15;
     public static final int ELITISM = 1;
-    public static final int LENGTH_TOURNAMENT = 10;
+    public static final int LENGTH_TOURNAMENT = 3;
 
     protected Generation generation;
+    private double[][] dataSet;
+    private Cube cube;
 
-    public GeneticAlgorithm() {
+    public GeneticAlgorithm(HashMap<Face, String[][]> cube) {
         this.generation = new Generation(LENGTH_POPULATION, LENGTH_CHROMOSOME);
-        this.generation.creatingInitialPopulation();
+        this.cube = new Cube(cube);
+        this.generation.creatingInitialPopulation(this.cube);
     }
 
+    public GeneticAlgorithm(int lengthPopulation, int lengthGeracao, HashMap<Face, String[][]> cube) {
+//        this.GENERATION = lengthGeracao;
+//        this.LENGTH_POPULATION = lengthPopulation;
+        this.generation = new Generation(LENGTH_POPULATION, LENGTH_CHROMOSOME);
+        this.cube = new Cube(cube);
+        this.generation.creatingInitialPopulation(this.cube);
+    }
+
+    //método responsável por criar uma nova população.
     public void createNewGeneration() {
         Generation newGeneration = elitism();
         newGeneration = applyOperators(newGeneration);
@@ -44,6 +59,7 @@ public class GeneticAlgorithm {
         return this.generation;
     }
 
+    //return o cromossomo de melhor fitness.
     public Chromosome returnBestChromosome() {
         return this.generation.getChromosomeByIndex(0);
     }
@@ -52,18 +68,21 @@ public class GeneticAlgorithm {
         return this.generation.getChromosomeByIndex(LENGTH_POPULATION - 1);
     }
 
+    //método responsável por selecionar o melho indivíduo da população antiga para a nova população.
     private Generation elitism() {
         Generation newGeneration = new Generation(LENGTH_POPULATION, LENGTH_CHROMOSOME);
-        newGeneration.addChromosome(0, new Chromosome(this.generation.getChromosomeByIndex(0).genotype));
+        newGeneration.addChromosome(0, new Chromosome(this.generation.getChromosomeByIndex(0).genotype, this.cube));
         return newGeneration;
     }
 
+    //método responsável por aplicar mutação e cruzamento no indíviduos de uma população, a fim de criar uma nova.
     private Generation applyOperators(Generation newGeneration) {
         newGeneration = crossover(newGeneration);
         newGeneration = mutation(newGeneration);
         return newGeneration;
     }
 
+    //método responsável por fazer o cruzamento de dois indivíduos.
     private Generation crossover(Generation newGeneration) {
         int index = ELITISM;
         while (index < LENGTH_POPULATION) {
@@ -72,30 +91,24 @@ public class GeneticAlgorithm {
             tournament = tournament();
             Chromosome mother = tournament[0];
             EnumCompositeMovement[][] children = exchange(father, mother);
-//            EnumPrimaryMovement[][] children = exchange(father, mother);
             for (int i = 0; i < children.length; i++) {
                 if (index < LENGTH_POPULATION) {
-                    newGeneration.addChromosome(index, new Chromosome(children[1]));
+                    newGeneration.addChromosome(index, new Chromosome(children[1], this.cube));
                     index++;
-                }else{
+                } else {
                     break;
                 }
             }
-//            newGeneration.addChromosome(index, new Chromosome(children[0]));
-//            index++;
 
         }
         return newGeneration;
     }
 
     private EnumCompositeMovement[][] exchange(Chromosome father, Chromosome mother) {
-//    private EnumPrimaryMovement[][] exchange(Chromosome father, Chromosome mother) {
         EnumCompositeMovement[][] genotypes;
-//        EnumPrimaryMovement[][] genotypes = new EnumPrimaryMovement[2][LENGTH_CHROMOSOME];
         int chance = (int) (Math.random() * 100);
         if (chance <= (PERCENTAGE_CROSSOVER * 100)) {
             genotypes = new EnumCompositeMovement[4][LENGTH_CHROMOSOME];
-//            genotypes = new EnumPrimaryMovement[4][LENGTH_CHROMOSOME];
             int limit = (int) (Math.random() * LENGTH_CHROMOSOME);
             for (int i = 0; i < limit; i++) {
                 genotypes[0][i] = father.genotype[i];
@@ -111,7 +124,6 @@ public class GeneticAlgorithm {
             }
         } else {
             genotypes = new EnumCompositeMovement[2][LENGTH_CHROMOSOME];
-//            genotypes = new EnumPrimaryMovement[2][LENGTH_CHROMOSOME];
             for (int i = 0; i < LENGTH_CHROMOSOME; i++) {
                 genotypes[0][i] = father.genotype[i];
                 genotypes[1][i] = mother.genotype[i];
@@ -120,6 +132,7 @@ public class GeneticAlgorithm {
         return genotypes;
     }
 
+    //método responsável por fazer a mutação em um indivíduo.
     private Generation mutation(Generation newGeneration) {
         int index = ELITISM;
         while (index < LENGTH_POPULATION) {
@@ -128,19 +141,11 @@ public class GeneticAlgorithm {
                 for (int i = 0; i < LENGTH_CHROMOSOME; i++) {
                     chance = 1 + (int) (Math.random() * 100);
                     if (chance <= (PERCENTAGE_UNIFORM_MUTATION * 100)) {
-//                    if (chance <= (PERCENTAGE_MUTATION * 100)) {
-//                        int indexMovement = new Random().nextInt(EnumCompositeMovement.values().length);
-//                        newGeneration.getChromosomeByIndex(index).genotype[i] = EnumCompositeMovement.values()[indexMovement];
-//                            int indexMovement = new Random().nextInt(EnumPrimaryMovement.values().length);
-//                        newGeneration.getChromosomeByIndex(index).genotype[i] = EnumPrimaryMovement.values()[indexMovement];
-
                         int indexMovement = -1;
                         do {
                             indexMovement = new Random().nextInt(EnumCompositeMovement.values().length);
                         } while (EnumCompositeMovement.values()[indexMovement] == newGeneration.getChromosomeByIndex(index).genotype[i]);
                         newGeneration.getChromosomeByIndex(index).genotype[i] = EnumCompositeMovement.values()[indexMovement];
-//                        } while (EnumPrimaryMovement.values()[indexMovement] == newGeneration.getChromosomeByIndex(index).genotype[i]);
-//                        newGeneration.getChromosomeByIndex(index).genotype[i] = EnumPrimaryMovement.values()[indexMovement];
                     }
 
                 }
@@ -150,6 +155,7 @@ public class GeneticAlgorithm {
         return newGeneration;
     }
 
+    //método responsável por fazer o torneio e selecionar indivíduos que poderão ser cruzados.
     private Chromosome[] tournament() {
         Chromosome[] tournament = new Chromosome[LENGTH_TOURNAMENT];
         for (int i = 0; i < LENGTH_TOURNAMENT; i++) {
@@ -162,6 +168,27 @@ public class GeneticAlgorithm {
         List<Chromosome> c = Arrays.asList(tournament);
         Collections.sort(c, Collections.reverseOrder());
         return (Chromosome[]) c.toArray();
+    }
+
+    //método responsável gerenciar os acontecimentos das gerações.
+    public void evolve() {
+        int generation = 0;
+        this.dataSet = new double[GENERATION][4];
+        while (generation < GENERATION) {
+            this.generation.calculateFitness();
+            Chromosome chromosome = returnBestChromosome();
+            chromosome.printFitness(generation);
+            dataSet[generation][0] = returnBestChromosome().getValueFitness();
+            dataSet[generation][1] = returnInferiorChromosome().getValueFitness();
+            dataSet[generation][2] = (dataSet[generation][0] + dataSet[generation][1]) / 2;
+            createNewGeneration();
+            generation++;
+        }
+        this.generation.calculateFitness();
+    }
+
+    public double[][] getDataSet() {
+        return this.dataSet;
     }
 
 }

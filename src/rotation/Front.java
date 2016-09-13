@@ -18,6 +18,7 @@ public class Front extends RotationFace {
         
     }
 
+    //método responsável por rotacionar a face front do cubo em 90º sentido horário.
     @Override
     public Cube rotateQuarterClockwise() {
         rotateUpToRight();

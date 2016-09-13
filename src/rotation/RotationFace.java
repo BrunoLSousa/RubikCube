@@ -23,12 +23,14 @@ public abstract class RotationFace {
     
     public abstract Cube rotateQuarterClockwise();
     
+    //método responsável por rotacionar a face do cubo em 90º sentido anti-horário.
     public Cube rotateQuarterCounterClockWise(){
         rotateHalfClockwise();
         rotateQuarterClockwise();
         return getCube();
     }
     
+    //método responsável por rotacionar a face do cubo em 180º sentido horário.
     public Cube rotateHalfClockwise(){
         rotateQuarterClockwise();
         rotateQuarterClockwise();
@@ -43,6 +45,7 @@ public abstract class RotationFace {
         return this.cube;
     }
     
+    //escreve a composição das faces do cubo na tela.
     public void printCube(){
         for(Face face : Face.values()){
             String[][] f = cube.getViewFace(face);

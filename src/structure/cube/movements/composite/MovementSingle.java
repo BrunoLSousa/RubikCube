@@ -5,9 +5,9 @@
  */
 package structure.cube.movements.composite;
 
+import structure.cube.movements.EnumCompositeMovement;
 import rotation.RotationFace;
-import structure.cube.movements.primary.EnumPrimaryMovement;
-import structure.cube.movements.primary.PrimaryMovement;
+import structure.cube.movements.PrimaryMovement;
 
 /**
  *
@@ -23,9 +23,10 @@ public class MovementSingle extends CompositeMovement{
         createCompositeMoviment();
     }
 
+    //aplica movimento requerido ao cubo.
     @Override
     protected void createCompositeMoviment() {
-        this.addMovementPrimary(new PrimaryMovement(EnumPrimaryMovement.valueOf(this.id.toString()), rotationFace));
+        this.addMovementPrimary(new PrimaryMovement(EnumCompositeMovement.valueOf(this.id.toString()), rotationFace));
     }
     
 }

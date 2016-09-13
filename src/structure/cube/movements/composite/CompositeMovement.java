@@ -5,10 +5,11 @@
  */
 package structure.cube.movements.composite;
 
+import structure.cube.movements.EnumCompositeMovement;
 import java.util.ArrayList;
 import java.util.List;
 import structure.cube.Cube;
-import structure.cube.movements.primary.PrimaryMovement;
+import structure.cube.movements.PrimaryMovement;
 
 /**
  *
@@ -34,6 +35,7 @@ public abstract class CompositeMovement {
         this.primaryMovements.add(primaryMovement);
     }
     
+    //aplica um determinado movimento primário ao cubo.
     public Cube doMoviment(Cube cube){
         for(PrimaryMovement m : this.primaryMovements){
             cube = m.doMoviment(cube);

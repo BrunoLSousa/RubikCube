@@ -15,29 +15,65 @@ public class Cube {
     
     private HashMap<Face, String[][]> cube;
 
-    public Cube() {
+    public Cube(HashMap<Face, String[][]> cube) {
         this.cube = new HashMap<>();
-        initializeCube();
+        cloneCube(cube);
+//        initializeCube();
+    }
+
+    public Cube(Cube cube) {
+        this.cube = new HashMap<>();
+        cloneCube(cube);
+//        initializeCube();
     }
     
-    private void initializeCube(){
-        //fazer aqui o upload do arquivo de teste.
-        
-        String[][] front = {{"G", "B", "B"}, {"G", "O", "O"}, {"G", "W", "W"}};
-        String[][] left = {{"B", "O", "R"}, {"G", "G", "Y"}, {"B", "B", "R"}};
-        String[][] right = {{"R", "O", "B"}, {"W", "B", "W"}, {"G", "R", "Y"}};
-        String[][] back = {{"O", "B", "R"}, {"B", "R", "R"}, {"O", "W", "Y"}};
-        String[][] up = {{"W", "Y", "W"}, {"Y", "Y", "G"}, {"Y", "R", "Y"}};
-        String[][] down = {{"W", "G", "O"}, {"O", "W", "Y"}, {"O", "R", "G"}};
-        
-        this.cube.put(Face.Front, front);
-        this.cube.put(Face.Left, left);
-        this.cube.put(Face.Right, right);
-        this.cube.put(Face.Back, back);
-        this.cube.put(Face.Up, up);
-        this.cube.put(Face.Down, down);
+    private void cloneCube(HashMap<Face, String[][]> cube) {
+        this.cube = new HashMap<>();
+        for (Face f : Face.values()) {
+            String[][] face = new String[3][3];
+            String[][] faceConvertion = cube.get(f);
+            for (int line = 0; line < 3; line++) {
+                for (int column = 0; column < 3; column++) {
+                    face[line][column] = faceConvertion[line][column];
+                }
+            }
+            this.cube.put(f, face);
+        }
     }
     
+    private void cloneCube(Cube cube) {
+        this.cube = new HashMap<>();
+        for (Face f : Face.values()) {
+            String[][] face = new String[3][3];
+            String[][] faceConvertion = cube.getViewFace(f);
+            for (int line = 0; line < 3; line++) {
+                for (int column = 0; column < 3; column++) {
+                    face[line][column] = faceConvertion[line][column];
+                }
+            }
+            this.cube.put(f, face);
+        }
+    }
+    
+    //método inicializado de um genótipo para teste.
+//    private void initializeCube(){
+//        //fazer aqui o upload do arquivo de teste.
+//        
+//        String[][] front = {{"G", "B", "B"}, {"G", "O", "O"}, {"G", "W", "W"}};
+//        String[][] left = {{"B", "O", "R"}, {"G", "G", "Y"}, {"B", "B", "R"}};
+//        String[][] right = {{"R", "O", "B"}, {"W", "B", "W"}, {"G", "R", "Y"}};
+//        String[][] back = {{"O", "B", "R"}, {"B", "R", "R"}, {"O", "W", "Y"}};
+//        String[][] up = {{"W", "Y", "W"}, {"Y", "Y", "G"}, {"Y", "R", "Y"}};
+//        String[][] down = {{"W", "G", "O"}, {"O", "W", "Y"}, {"O", "R", "G"}};
+//        
+//        this.cube.put(Face.Front, front);
+//        this.cube.put(Face.Left, left);
+//        this.cube.put(Face.Right, right);
+//        this.cube.put(Face.Back, back);
+//        this.cube.put(Face.Up, up);
+//        this.cube.put(Face.Down, down);
+//    }
+//    
     public String[][] getViewFace(Face face){
         return this.cube.get(face);
     }
@@ -53,6 +89,7 @@ public class Cube {
         return 0;
     }
     
+    //atualiza determinada face.
     public void updateFace(Face key, String[][] face){
         this.cube.remove(key);
         this.cube.put(key, face);

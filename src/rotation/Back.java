@@ -18,6 +18,7 @@ public class Back extends RotationFace {
         
     }
 
+    //método responsável por rotacionar a face back do cubo em 90º sentido horário.
     @Override
     public Cube rotateQuarterClockwise() {
         rotateUpToLeft();

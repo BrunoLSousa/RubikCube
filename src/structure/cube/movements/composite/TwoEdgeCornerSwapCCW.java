@@ -5,12 +5,12 @@
  */
 package structure.cube.movements.composite;
 
+import structure.cube.movements.EnumCompositeMovement;
 import rotation.Back;
 import rotation.Front;
 import rotation.Left;
 import rotation.Up;
-import structure.cube.movements.primary.EnumPrimaryMovement;
-import structure.cube.movements.primary.PrimaryMovement;
+import structure.cube.movements.PrimaryMovement;
 
 /**
  *
@@ -23,22 +23,23 @@ public class TwoEdgeCornerSwapCCW extends CompositeMovement{
         createCompositeMoviment();
     }
 
+    //cria um movimento composto a partir dos movimentos primários.
     @Override
     protected void createCompositeMoviment() {
-        this.addMovementPrimary(new PrimaryMovement(EnumPrimaryMovement.L, new Left()));
-        this.addMovementPrimary(new PrimaryMovement(EnumPrimaryMovement.U1, new Up()));
-        this.addMovementPrimary(new PrimaryMovement(EnumPrimaryMovement.L1, new Left()));
-        this.addMovementPrimary(new PrimaryMovement(EnumPrimaryMovement.U, new Up()));
-        this.addMovementPrimary(new PrimaryMovement(EnumPrimaryMovement.L, new Left()));
-        this.addMovementPrimary(new PrimaryMovement(EnumPrimaryMovement.U1, new Up()));
-        this.addMovementPrimary(new PrimaryMovement(EnumPrimaryMovement.F1, new Front()));
-        this.addMovementPrimary(new PrimaryMovement(EnumPrimaryMovement.L1, new Left()));
-        this.addMovementPrimary(new PrimaryMovement(EnumPrimaryMovement.B, new Back()));
-        this.addMovementPrimary(new PrimaryMovement(EnumPrimaryMovement.L1, new Left()));
-        this.addMovementPrimary(new PrimaryMovement(EnumPrimaryMovement.B1, new Back()));
-        this.addMovementPrimary(new PrimaryMovement(EnumPrimaryMovement.L1, new Left()));
-        this.addMovementPrimary(new PrimaryMovement(EnumPrimaryMovement.F, new Front()));
-        this.addMovementPrimary(new PrimaryMovement(EnumPrimaryMovement.L2, new Left()));
+        this.addMovementPrimary(new PrimaryMovement(EnumCompositeMovement.L, new Left()));
+        this.addMovementPrimary(new PrimaryMovement(EnumCompositeMovement.U1, new Up()));
+        this.addMovementPrimary(new PrimaryMovement(EnumCompositeMovement.L1, new Left()));
+        this.addMovementPrimary(new PrimaryMovement(EnumCompositeMovement.U, new Up()));
+        this.addMovementPrimary(new PrimaryMovement(EnumCompositeMovement.L, new Left()));
+        this.addMovementPrimary(new PrimaryMovement(EnumCompositeMovement.U1, new Up()));
+        this.addMovementPrimary(new PrimaryMovement(EnumCompositeMovement.F1, new Front()));
+        this.addMovementPrimary(new PrimaryMovement(EnumCompositeMovement.L1, new Left()));
+        this.addMovementPrimary(new PrimaryMovement(EnumCompositeMovement.B, new Back()));
+        this.addMovementPrimary(new PrimaryMovement(EnumCompositeMovement.L1, new Left()));
+        this.addMovementPrimary(new PrimaryMovement(EnumCompositeMovement.B1, new Back()));
+        this.addMovementPrimary(new PrimaryMovement(EnumCompositeMovement.L1, new Left()));
+        this.addMovementPrimary(new PrimaryMovement(EnumCompositeMovement.F, new Front()));
+        this.addMovementPrimary(new PrimaryMovement(EnumCompositeMovement.L2, new Left()));
     }
     
 }
