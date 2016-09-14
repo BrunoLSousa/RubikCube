@@ -82,15 +82,13 @@ public class Chromosome implements Comparable<Chromosome> {
     }
 
     public void printInformation() {
-        System.out.println("Movimentos:");
+        System.out.println("Sequence of movements:");
         for (int index = 0; index < this.genotype.length; index++) {
             System.out.print(this.genotype[index].toString() + " ");
         }
         System.out.println("\n");
 
-        System.out.println("Fitness: " + this.valueFitness + "\n");
-
-        System.out.println("Phenotype:");
+        System.out.println("Cube's Configuration :");
         this.phenotype.printCube();
     }
 

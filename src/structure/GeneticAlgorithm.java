@@ -173,8 +173,6 @@ public class GeneticAlgorithm {
         this.dataSet = new double[GENERATION][4];
         while (generation < GENERATION) {
             this.generation.calculateFitness();
-            Chromosome chromosome = returnBestChromosome();
-            chromosome.printFitness(generation);
             dataSet[generation][0] = returnBestChromosome().getValueFitness();
             dataSet[generation][1] = returnInferiorChromosome().getValueFitness();
             dataSet[generation][2] = (dataSet[generation][0] + dataSet[generation][1]) / 2;
