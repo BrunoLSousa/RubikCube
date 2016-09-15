@@ -60,12 +60,11 @@ Para fazer a instalação do programa, siga os seguintes passos:
 
 Para executar o programa, siga os seguintes passos:
 
-* Abra o terminal do Linux e vá para a pasta script dentro da pasta do projeto extraída 
-utilizando o comando cd (digite: cd "nome_do_diretorio" e pressione enter);
+* Abra o terminal do Linux e vá para a pasta script dentro da pasta do projeto extraída utilizando o comando cd (digite: cd "nome_do_diretorio" e pressione enter);
 
 * Execute o seguinte comando: ./executar.sh "nome do arquivo de entrada" "nome do arquivo de saída". 
-    ** Ex.: ./executar in1 out1.
-    ** Obs.: Ao indicar o arquivo de entrada para o programa, certifique-se que o nome do arquivo ou diretório do mesmo está correto. Além disso, certifique-se de que o arquivo fornecido como entrada possui o 
+    * Ex.: ./executar in1 out1.
+    * Obs.: Ao indicar o arquivo de entrada para o programa, certifique-se que o nome do arquivo ou diretório do mesmo está correto. Além disso, certifique-se de que o arquivo fornecido como entrada possui o 
        padrão correto especificado na documentação (ver Seção 4.2 da documentação).
 
 * Pronto. Programa executado.
