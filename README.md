@@ -6,8 +6,7 @@ Trabalho da disciplina Computação Natural - UFMG
 
 ##Objetivo 
 
-O objetivo desse trabalho é utilizar o algoritmo genético para resolver o cubo mágico, a partir de um dado estado. Com isso, 
-busca-se uma solução que aproxime-se da solução ótima por meio da evolução de n populações, nas quais estão representadas 
+O objetivo desse trabalho é utilizar o algoritmo genético para resolver o cubo mágico, a partir de um dado estado. Com isso, busca-se uma solução que aproxime-se da solução ótima por meio da evolução de n populações, nas quais estão representadas 
 possíveis soluções do espaço de busca do problema.
 
 ##Informações importantes sobre o Algoritmo Génetico
