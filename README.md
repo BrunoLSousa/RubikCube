@@ -16,8 +16,8 @@ possíveis soluções do espaço de busca do problema.
   - **1. Cromossomo:**
      - 1.1. Genótipo: representa uma sequência de possíveis movimentos que serão aplicadas ao cubo para uma possível resolução do mesmo.
      - 1.2. Fenótipo: representa o estado final do cubo após a aplicação da sequência de movimentos (genótipo).
-  - **2. Operadores:
-     - 1.1. Cruzamento: foi utizado um cruzamento de ponto para este algoritmo com uma probabilidade de 30%.
+  - **2. Operadores:**
+     - **1.1. Cruzamento:** foi utizado um cruzamento de ponto para este algoritmo com uma probabilidade de 30%.
      - 1.2. Mutação: foi utilizado uma mutação uniforme para este algoritmo com uma probabilidade de 15% para escolha de 
             um indivíduo e 15% para escolha de um gene.
      - 1.3. Seleção: foi utilizado o método de seleção por torneio de tamanho 3 (k=3).
